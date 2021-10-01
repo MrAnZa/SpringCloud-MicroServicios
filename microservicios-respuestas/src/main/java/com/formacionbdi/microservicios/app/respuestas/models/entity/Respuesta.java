@@ -22,8 +22,7 @@ public class Respuesta {
 	private Long id;
 	
 	private String texto;
-	
-	//@ManyToOne(fetch = FetchType.LAZY)
+
 	@Transient
 	private Alumno alumno;
 	

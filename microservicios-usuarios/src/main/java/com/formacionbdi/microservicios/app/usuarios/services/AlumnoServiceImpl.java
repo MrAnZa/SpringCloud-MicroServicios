@@ -13,6 +13,7 @@ import com.formacionbdi.microservicios.commons.services.CommonServiceImpl;
 
 @Service
 public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepository> implements AlumnoService {
+
 	@Autowired
 	private CursoFeignClient clientCurso;
 	
@@ -23,16 +24,14 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public Iterable<Alumno> findAllById(Iterable<Long> ids) {
-		
 		return repository.findAllById(ids);
 	}
 
 	@Override
 	public void eliminarCursoAlumnoPorId(Long id) {
 		clientCurso.eliminarCursoAlumnoPorId(id);
-		
 	}
 
 	@Override
@@ -41,8 +40,6 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
 		super.deleteById(id);
 		this.eliminarCursoAlumnoPorId(id);
 	}
-	
-	
 	
 
 }

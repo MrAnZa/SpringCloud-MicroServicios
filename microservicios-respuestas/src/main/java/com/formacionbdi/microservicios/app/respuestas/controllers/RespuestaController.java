@@ -23,7 +23,7 @@ public class RespuestaController {
 	
 	@PostMapping
 	public ResponseEntity<?> crear(@RequestBody Iterable<Respuesta> respuestas){
-		respuestas=((List<Respuesta>) respuestas).stream().map(r->{
+		respuestas = ((List<Respuesta>)respuestas).stream().map(r -> {
 			r.setAlumnoId(r.getAlumno().getId());
 			return r;
 		}).collect(Collectors.toList());

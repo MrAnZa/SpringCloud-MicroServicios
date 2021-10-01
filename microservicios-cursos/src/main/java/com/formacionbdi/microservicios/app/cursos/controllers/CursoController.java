@@ -44,27 +44,29 @@ public class CursoController extends CommonController<Curso, CursoService>{
 	@Override
 	public ResponseEntity<?> listar(){
 		List<Curso> cursos = ((List<Curso>) service.findAll()).stream().map(c ->{
-			c.getCursoAlumnos().forEach(ca->{
-				Alumno alumno = new Alumno();
+			c.getCursoAlumnos().forEach(ca ->{
+				Alumno alumno  = new Alumno();
 				alumno.setId(ca.getAlumnoId());
 				c.addAlumno(alumno);
 			});
 			return c;
 		}).collect(Collectors.toList());
+		
 		return ResponseEntity.ok().body(cursos);
 	}
 	
 	@GetMapping("/pagina")
 	@Override
 	public ResponseEntity<?> listar(Pageable pageable){
-		Page<Curso> cursos = service.findAll(pageable).map(curso->{
-			curso.getCursoAlumnos().forEach(ca->{
-				Alumno alumno = new Alumno();
+		Page<Curso> cursos = service.findAll(pageable).map(curso ->{
+			curso.getCursoAlumnos().forEach(ca ->{
+				Alumno alumno  = new Alumno();
 				alumno.setId(ca.getAlumnoId());
 				curso.addAlumno(alumno);
 			});
 			return curso;
 		});
+		
 		return ResponseEntity.ok().body(cursos);
 	}
 	
@@ -76,14 +78,18 @@ public class CursoController extends CommonController<Curso, CursoService>{
 			return ResponseEntity.notFound().build();
 		}
 		Curso curso = o.get();
-		if(curso.getCursoAlumnos().isEmpty() == false) {
-			List<Long> ids=curso.getCursoAlumnos().stream().map(ca -> {
-				return ca.getAlumnoId();
-			}).collect(Collectors.toList());
 		
-			List<Alumno> alumnos =(List<Alumno>) service.obtenerAlumnosPorCurso(ids);
+		if(curso.getCursoAlumnos().isEmpty() == false) {
+			
+			List<Long> ids = curso.getCursoAlumnos().stream().map(ca -> ca.getAlumnoId())
+					.collect(Collectors.toList());
+			
+			List<Alumno> alumnos = (List<Alumno>) service.obtenerAlumnosPorCurso(ids);
+			
 			curso.setAlumnos(alumnos);
-		}	
+			
+		}
+		
 		return ResponseEntity.ok().body(curso);
 	}
 	
@@ -120,7 +126,7 @@ public class CursoController extends CommonController<Curso, CursoService>{
 	    Curso dbCurso = o.get();
 	    
 	    alumnos.forEach(a -> {
-	    	CursoAlumno cursoAlumno =  new CursoAlumno();
+	    	CursoAlumno cursoAlumno = new CursoAlumno();
 	    	cursoAlumno.setAlumnoId(a.getId());
 	    	cursoAlumno.setCurso(dbCurso);
 	    	dbCurso.addCursoAlumno(cursoAlumno);

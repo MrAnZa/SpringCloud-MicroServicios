@@ -33,13 +33,13 @@ public class CursoServiceImpl extends CommonServiceImpl<Curso, CursoRepository> 
 
 	@Override
 	public Iterable<Alumno> obtenerAlumnosPorCurso(Iterable<Long> ids) {
-		// TODO Auto-generated method stub
 		return clientAlumno.obtenerAlumnosPorCurso(ids);
 	}
-	
+
 	@Override
 	@Transactional
 	public void eliminarCursoAlumnoPorId(Long id) {
 		repository.eliminarCursoAlumnoPorId(id);
 	}
+
 }

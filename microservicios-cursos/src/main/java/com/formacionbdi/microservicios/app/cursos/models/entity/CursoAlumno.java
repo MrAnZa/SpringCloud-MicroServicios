@@ -17,14 +17,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class CursoAlumno {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="alumno_id",unique=true)
+	@Column(name="alumno_id", unique = true)
 	private Long alumnoId;
 	
 	@JsonIgnoreProperties(value= {"cursoAlumnos"})
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="curso_id")
 	private Curso curso;
 
@@ -54,19 +54,19 @@ public class CursoAlumno {
 
 	@Override
 	public boolean equals(Object obj) {
-		if(this==obj) {
+
+		if(this == obj) {
 			return true;
 		}
 		
 		if(!(obj instanceof CursoAlumno)) {
 			return false;
 		}
+
+		CursoAlumno a = (CursoAlumno) obj;
 		
-		CursoAlumno ca = (CursoAlumno) obj;
-				
-		return this.alumnoId!=null && this.alumnoId.equals(ca.getAlumnoId());
+		return this.alumnoId != null && this.alumnoId.equals(a.getAlumnoId());
 	}
-	
 	
 	
 }

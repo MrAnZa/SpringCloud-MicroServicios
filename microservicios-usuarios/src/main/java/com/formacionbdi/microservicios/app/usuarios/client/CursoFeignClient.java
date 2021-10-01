@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name="microservicio-cursos")
 public interface CursoFeignClient {
-	
+
 	@DeleteMapping("/eliminar-alumno/{id}")
 	public void eliminarCursoAlumnoPorId(@PathVariable Long id);
 }

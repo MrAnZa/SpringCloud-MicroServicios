@@ -27,9 +27,10 @@ import com.formacionbdi.microservicios.commons.controllers.CommonController;
 
 @RestController
 public class AlumnoController extends CommonController<Alumno, AlumnoService>{
+
 	@GetMapping("/alumnos-por-curso")
 	public ResponseEntity<?> obtenerAlumnosPorCurso(@RequestParam List<Long> ids){
-	return ResponseEntity.ok(service.findAllById(ids));	
+		return ResponseEntity.ok(service.findAllById(ids));
 	}
 	
 	@GetMapping("/uploads/img/{id}")

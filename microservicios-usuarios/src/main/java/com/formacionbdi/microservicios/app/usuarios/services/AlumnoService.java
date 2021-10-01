@@ -12,5 +12,4 @@ public interface AlumnoService extends CommonService<Alumno>{
 	public Iterable<Alumno> findAllById(Iterable<Long> ids);
 	
 	public void eliminarCursoAlumnoPorId(Long id);
-
 }
